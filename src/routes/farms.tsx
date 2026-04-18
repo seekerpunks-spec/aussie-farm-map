@@ -124,7 +124,7 @@ function FarmListPage() {
                   className="w-full aspect-square object-cover border-2 border-foreground shadow-polaroid rotate-[3deg]"
                 />
                 <div className="absolute -bottom-2 left-2 right-2 text-center font-hand text-base text-foreground bg-card py-0.5 border border-foreground/30">
-                  {state!.code} · {state!.season ?? "summer"}
+                  {state!.code} · summer '24
                 </div>
               </div>
             </div>
