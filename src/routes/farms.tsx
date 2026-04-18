@@ -4,14 +4,15 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { AustraliaMap } from "@/components/AustraliaMap";
 import { FarmCard } from "@/components/FarmCard";
 import { STATES, generateFarms, getState, type StateCode } from "@/lib/farms-data";
-import { ArrowLeft, Search, Sparkles } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
+import farmVintage from "@/assets/farm-vintage.jpg";
 
 export const Route = createFileRoute("/farms")({
   head: () => ({
     meta: [
-      { title: "Farm List — Discover Australian Farms | Driftwork" },
-      { name: "description", content: "Explore working hostels and farms across every Australian state. Tap the map to discover your next adventure." },
-      { property: "og:title", content: "Farm List — Driftwork Aus Farm Atlas" },
+      { title: "Farm List — Driftwork Aussie Farm Atlas" },
+      { name: "description", content: "A hand-drawn atlas of working hostels and farms across every Australian state." },
+      { property: "og:title", content: "Farm List — Driftwork" },
       { property: "og:description", content: "Map-first discovery of Australian farm work, state by state." },
     ],
   }),
@@ -39,89 +40,114 @@ function FarmListPage() {
       <SiteHeader />
 
       {!selected ? (
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-          {/* Hero copy */}
-          <div className="text-center max-w-2xl mx-auto animate-float-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card/80 border border-border text-xs font-semibold text-primary-deep">
-              <Sparkles className="w-3.5 h-3.5 text-accent" />
-              {totalFarms.toLocaleString()} farms · 8 states · 1 wild continent
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+          {/* Hero */}
+          <div className="text-center max-w-3xl mx-auto animate-float-up">
+            <div className="inline-block font-hand text-2xl text-primary-deep rotate-[-2deg]">
+              ~ chapter one ~
             </div>
-            <h1 className="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground">
-              Pick your <span className="bg-gradient-ocean bg-clip-text text-transparent">patch of paradise</span>
+            <h1 className="mt-2 font-display text-5xl sm:text-7xl leading-[0.95] text-foreground">
+              The Aussie
+              <br />
+              <span className="text-primary">Farm Atlas</span>
             </h1>
-            <p className="mt-3 text-base text-muted-foreground">
-              Tap a state to dive into its farm scene. From reef-side fruit picks to outback stations — your next adventure is one click away.
+            <p className="mt-4 font-serif-d italic text-lg sm:text-xl text-foreground/70">
+              {totalFarms} working farms · 8 states · one wild continent
             </p>
           </div>
 
           {/* Map */}
-          <div className="mt-8 sm:mt-10 relative rounded-3xl bg-card/60 backdrop-blur p-3 sm:p-6 border border-border shadow-elegant">
+          <div className="mt-10 sm:mt-14 max-w-3xl mx-auto relative">
             <AustraliaMap selected={selected} onSelect={setSelected} />
           </div>
 
-          {/* State quick list */}
-          <div className="mt-10">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-3">Or jump straight in</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* States as ticket stubs */}
+          <div className="mt-20 sm:mt-24">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="h-px flex-1 bg-foreground/30" />
+              <span className="font-hand text-2xl text-primary-deep rotate-[-2deg]">or pick from the list</span>
+              <div className="h-px flex-1 bg-foreground/30" />
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {STATES.map((s, i) => (
                 <button
                   key={s.code}
                   onClick={() => setSelected(s.code)}
-                  className="group text-left p-4 rounded-2xl bg-card border border-border hover:border-primary hover:shadow-elegant transition-all hover:-translate-y-0.5"
-                  style={{ animation: `float-up 0.5s var(--ease-out-soft) ${0.3 + i * 0.05}s both` }}
+                  className="group relative text-left bg-card border-2 border-foreground shadow-sticker hover:shadow-elegant hover:-translate-y-1 transition-all p-4"
+                  style={{
+                    animation: `float-up 0.5s var(--ease-out-soft) ${0.3 + i * 0.05}s both`,
+                    transform: `rotate(${i % 2 === 0 ? "-0.8deg" : "0.8deg"})`,
+                  }}
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-primary">{s.code}</span>
-                    <span className="text-2xl font-extrabold text-foreground group-hover:text-accent transition-colors">{s.count}</span>
+                  <div className="flex items-baseline justify-between">
+                    <span className="font-display text-xs uppercase tracking-widest text-primary">{s.code}</span>
+                    <span className="font-display text-3xl text-foreground group-hover:text-primary transition-colors">{s.count}</span>
                   </div>
-                  <div className="mt-1 font-semibold text-sm text-foreground">{s.name}</div>
-                  <div className="text-[11px] text-muted-foreground line-clamp-1">{s.tagline}</div>
+                  <div className="mt-1 font-display text-base text-foreground leading-tight">{s.name}</div>
+                  <div className="font-hand text-base text-foreground/60 leading-tight mt-0.5">{s.tagline}</div>
+                  {/* perforated edge */}
+                  <div className="absolute -bottom-1 left-0 right-0 h-1.5 bg-[radial-gradient(circle,var(--background)_1.5px,transparent_2px)] bg-[length:8px_4px]" />
                 </button>
               ))}
             </div>
           </div>
         </main>
       ) : (
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 animate-float-up">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-            <div>
-              <button
-                onClick={() => { setSelected(null); setQuery(""); }}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-              >
-                <ArrowLeft className="w-4 h-4" /> Back to map
-              </button>
-              <div className="mt-3 flex items-center gap-3">
-                <span className="font-mono text-xs font-bold px-2 py-1 rounded-md bg-primary text-primary-foreground">{state!.code}</span>
-                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">{state!.name}</h1>
-              </div>
-              <p className="mt-1 text-muted-foreground">{state!.tagline}</p>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="text-2xl font-extrabold bg-gradient-sunset bg-clip-text text-transparent">{state!.count}</span>
-                <span className="text-sm text-muted-foreground">farms · showing {filtered.length}</span>
-              </div>
-            </div>
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 animate-float-up">
+          {/* State header — postcard style */}
+          <button
+            onClick={() => { setSelected(null); setQuery(""); }}
+            className="inline-flex items-center gap-1.5 font-display text-xs uppercase tracking-widest text-foreground hover:text-primary transition-colors mb-6"
+          >
+            <ArrowLeft className="w-4 h-4" /> Back to map
+          </button>
 
-            {/* Search */}
-            <div className="relative w-full sm:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search farms, regions, work..."
-                className="w-full pl-9 pr-4 py-2.5 rounded-full bg-card border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm transition-all"
-              />
+          <div className="relative bg-card border-2 border-foreground shadow-sticker p-5 sm:p-8 rotate-[-0.5deg]">
+            <div className="absolute -top-3 right-8 w-24 h-6 bg-sun/80 rotate-[4deg] border border-foreground/30" />
+            <div className="grid sm:grid-cols-[1fr_180px] gap-6 items-center">
+              <div>
+                <div className="font-hand text-2xl text-primary-deep">postcard from</div>
+                <h1 className="font-display text-5xl sm:text-6xl text-foreground leading-[0.9]">{state!.name}</h1>
+                <p className="mt-2 font-serif-d italic text-lg text-foreground/70">{state!.tagline}</p>
+                <div className="mt-4 flex items-baseline gap-2">
+                  <span className="font-display text-4xl text-primary">{state!.count}</span>
+                  <span className="font-hand text-xl text-foreground/70">farms · showing {filtered.length}</span>
+                </div>
+              </div>
+              <div className="hidden sm:block relative">
+                <img
+                  src={farmVintage}
+                  alt=""
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  className="w-full aspect-square object-cover border-2 border-foreground shadow-polaroid rotate-[3deg]"
+                />
+                <div className="absolute -bottom-2 left-2 right-2 text-center font-hand text-base text-foreground bg-card py-0.5 border border-foreground/30">
+                  {state!.code} · summer '24
+                </div>
+              </div>
             </div>
+          </div>
+
+          {/* Search */}
+          <div className="mt-8 relative max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/60" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search farms, regions, work..."
+              className="w-full pl-9 pr-4 py-2.5 bg-card border-2 border-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 font-sans text-sm shadow-sticker"
+            />
           </div>
 
           {/* Grid */}
           {filtered.length === 0 ? (
-            <div className="mt-12 text-center text-muted-foreground">
-              No farms match "{query}". Try a different search.
+            <div className="mt-16 text-center font-hand text-2xl text-foreground/60">
+              no farms match "{query}". try something else?
             </div>
           ) : (
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {filtered.map((farm, i) => (
                 <FarmCard key={farm.id} farm={farm} index={i} />
               ))}
