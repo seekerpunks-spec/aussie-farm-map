@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;700&family=DM+Serif+Display&family=Work+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
@@ -62,49 +63,59 @@
 }
 
 :root {
-  --radius: 0.875rem;
-  /* Coastal Adventure palette */
-  --background: oklch(0.985 0.012 90);          /* warm sand */
-  --foreground: oklch(0.22 0.04 230);           /* deep navy ink */
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.04 230);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.04 230);
-  --primary: oklch(0.62 0.12 200);              /* teal */
-  --primary-foreground: oklch(0.99 0.01 200);
-  --primary-glow: oklch(0.78 0.13 200);         /* light teal glow */
-  --primary-deep: oklch(0.42 0.10 220);         /* deep ocean */
-  --secondary: oklch(0.95 0.02 80);             /* light sand */
-  --secondary-foreground: oklch(0.28 0.04 230);
-  --muted: oklch(0.95 0.018 85);
-  --muted-foreground: oklch(0.5 0.03 230);
-  --accent: oklch(0.72 0.18 35);                /* coral */
-  --accent-foreground: oklch(0.99 0.01 35);
-  --accent-glow: oklch(0.82 0.14 50);           /* warm coral glow */
-  --sun: oklch(0.85 0.15 80);                   /* sunny gold */
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.02 90);
-  --input: oklch(0.92 0.018 90);
-  --ring: oklch(0.62 0.12 200);
+  --radius: 0.5rem;
+  /* Retro Surf 70s palette */
+  --background: oklch(0.955 0.025 80);          /* aged cream paper */
+  --foreground: oklch(0.25 0.06 40);            /* deep brown ink */
+  --card: oklch(0.975 0.018 85);                /* lighter cream */
+  --card-foreground: oklch(0.25 0.06 40);
+  --popover: oklch(0.975 0.018 85);
+  --popover-foreground: oklch(0.25 0.06 40);
+  --primary: oklch(0.62 0.18 40);               /* burnt orange */
+  --primary-foreground: oklch(0.98 0.015 85);
+  --primary-glow: oklch(0.78 0.16 60);          /* sunny mustard */
+  --primary-deep: oklch(0.42 0.14 30);          /* terracotta deep */
+  --secondary: oklch(0.92 0.04 75);             /* warm sand */
+  --secondary-foreground: oklch(0.32 0.07 40);
+  --muted: oklch(0.93 0.025 80);
+  --muted-foreground: oklch(0.5 0.05 50);
+  --accent: oklch(0.55 0.10 200);               /* deep teal ocean */
+  --accent-foreground: oklch(0.98 0.015 85);
+  --accent-glow: oklch(0.7 0.11 195);
+  --sun: oklch(0.82 0.16 75);                   /* mustard yellow */
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0.015 85);
+  --border: oklch(0.82 0.05 60);                /* warm tan border */
+  --input: oklch(0.88 0.04 70);
+  --ring: oklch(0.62 0.18 40);
 
   /* Gradients */
-  --gradient-ocean: linear-gradient(135deg, oklch(0.62 0.12 200), oklch(0.42 0.10 220));
-  --gradient-sunset: linear-gradient(135deg, oklch(0.78 0.16 55), oklch(0.65 0.18 25));
-  --gradient-sand: linear-gradient(180deg, oklch(0.985 0.012 90), oklch(0.95 0.025 85));
-  --gradient-hero: radial-gradient(ellipse at top, oklch(0.92 0.05 200 / 0.6), transparent 60%),
-                   radial-gradient(ellipse at bottom right, oklch(0.85 0.08 35 / 0.35), transparent 55%),
-                   linear-gradient(180deg, oklch(0.985 0.012 90), oklch(0.96 0.02 85));
+  --gradient-sunset: linear-gradient(180deg, oklch(0.85 0.16 75) 0%, oklch(0.7 0.18 50) 45%, oklch(0.55 0.18 30) 100%);
+  --gradient-ocean: linear-gradient(135deg, oklch(0.65 0.11 200), oklch(0.42 0.10 220));
+  --gradient-paper: radial-gradient(ellipse at top, oklch(0.97 0.02 80), oklch(0.93 0.04 75));
+  --gradient-hero: radial-gradient(ellipse at 70% 20%, oklch(0.85 0.13 70 / 0.6), transparent 55%),
+                   radial-gradient(ellipse at 10% 90%, oklch(0.6 0.10 200 / 0.25), transparent 55%),
+                   linear-gradient(180deg, oklch(0.96 0.025 85), oklch(0.93 0.04 75));
+
+  /* Paper noise texture */
+  --paper-noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.25 0 0 0 0 0.1 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 
   /* Shadows */
-  --shadow-soft: 0 4px 18px -6px oklch(0.42 0.10 220 / 0.15);
-  --shadow-elegant: 0 18px 50px -20px oklch(0.42 0.10 220 / 0.35);
-  --shadow-glow: 0 0 40px oklch(0.78 0.13 200 / 0.45);
-  --shadow-coral: 0 10px 30px -12px oklch(0.72 0.18 35 / 0.5);
+  --shadow-soft: 0 4px 14px -4px oklch(0.42 0.14 30 / 0.18);
+  --shadow-elegant: 0 20px 50px -22px oklch(0.42 0.14 30 / 0.4);
+  --shadow-glow: 0 0 40px oklch(0.78 0.16 60 / 0.55);
+  --shadow-sticker: 4px 4px 0 oklch(0.25 0.06 40 / 0.85);
+  --shadow-polaroid: 0 2px 4px oklch(0.25 0.06 40 / 0.15), 0 12px 30px -10px oklch(0.25 0.06 40 / 0.4);
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Fonts */
+  --font-display: "Alfa Slab One", "DM Serif Display", Georgia, serif;
+  --font-serif: "DM Serif Display", Georgia, serif;
+  --font-hand: "Caveat", "Comic Sans MS", cursive;
+  --font-sans: "Work Sans", system-ui, sans-serif;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
