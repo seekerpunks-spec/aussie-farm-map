@@ -171,6 +171,10 @@
   --color-primary-deep: var(--primary-deep);
   --color-accent-glow: var(--accent-glow);
   --color-sun: var(--sun);
+  --font-display: var(--font-display);
+  --font-serif: var(--font-serif);
+  --font-hand: var(--font-hand);
+  --font-sans: var(--font-sans);
 }
 
 @layer base {
@@ -178,10 +182,15 @@
     border-color: var(--color-border);
   }
 
+  html, body {
+    font-family: var(--font-sans);
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-feature-settings: "ss01", "cv11";
+    background-image: var(--paper-noise);
+    background-blend-mode: multiply;
     -webkit-font-smoothing: antialiased;
   }
 }
@@ -190,30 +199,37 @@
   .bg-gradient-ocean { background-image: var(--gradient-ocean); }
   .bg-gradient-sunset { background-image: var(--gradient-sunset); }
   .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .bg-gradient-paper { background-image: var(--gradient-paper); }
+  .bg-paper-noise { background-image: var(--paper-noise); }
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-elegant { box-shadow: var(--shadow-elegant); }
   .shadow-glow { box-shadow: var(--shadow-glow); }
-  .shadow-coral { box-shadow: var(--shadow-coral); }
+  .shadow-sticker { box-shadow: var(--shadow-sticker); }
+  .shadow-polaroid { box-shadow: var(--shadow-polaroid); }
+  .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+  .font-serif-d { font-family: var(--font-serif); }
+  .font-hand { font-family: var(--font-hand); }
 
   @keyframes float-up {
     0% { opacity: 0; transform: translateY(14px) scale(0.96); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
   }
   @keyframes pulse-ring {
-    0% { transform: scale(0.85); opacity: 0.7; }
-    70% { transform: scale(1.4); opacity: 0; }
-    100% { transform: scale(1.4); opacity: 0; }
+    0% { transform: scale(0.85); opacity: 0.8; }
+    70% { transform: scale(1.6); opacity: 0; }
+    100% { transform: scale(1.6); opacity: 0; }
   }
-  @keyframes draw-stroke {
-    from { stroke-dashoffset: 1200; }
-    to { stroke-dashoffset: 0; }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
   }
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+  @keyframes drift {
+    0%, 100% { transform: translateY(0px) rotate(-1deg); }
+    50% { transform: translateY(-6px) rotate(1deg); }
   }
-  .animate-float-up { animation: float-up 0.6s var(--ease-out-soft) both; }
+  .animate-float-up { animation: float-up 0.7s var(--ease-out-soft) both; }
   .animate-pulse-ring { animation: pulse-ring 2.4s ease-out infinite; }
-  .animate-draw { animation: draw-stroke 1.6s var(--ease-out-soft) both; }
+  .animate-wiggle { animation: wiggle 0.6s ease-in-out infinite; }
+  .animate-drift { animation: drift 6s ease-in-out infinite; }
 }
 
