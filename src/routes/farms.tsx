@@ -5,7 +5,7 @@ import { AustraliaMap } from "@/components/AustraliaMap";
 import { FarmCard } from "@/components/FarmCard";
 import { STATES, generateFarms, getState, type StateCode } from "@/lib/farms-data";
 import { ArrowLeft, Search } from "lucide-react";
-import farmVintage from "@/assets/farm-vintage.jpg";
+import { STATE_IMAGES, STATE_CAPTIONS } from "@/lib/state-images";
 
 export const Route = createFileRoute("/farms")({
   head: () => ({
@@ -116,15 +116,16 @@ function FarmListPage() {
               </div>
               <div className="hidden sm:block relative">
                 <img
-                  src={farmVintage}
-                  alt=""
+                  key={state!.code}
+                  src={STATE_IMAGES[state!.code]}
+                  alt={`Vintage photo of ${state!.name}`}
                   loading="lazy"
                   width={1024}
                   height={1024}
-                  className="w-full aspect-square object-cover border-2 border-foreground shadow-polaroid rotate-[3deg]"
+                  className="w-full aspect-square object-cover border-2 border-foreground shadow-polaroid rotate-[3deg] animate-float-up"
                 />
-                <div className="absolute -bottom-2 left-2 right-2 text-center font-hand text-base text-foreground bg-card py-0.5 border border-foreground/30">
-                  {state!.code} · summer '24
+                <div className="absolute -bottom-2 left-2 right-2 text-center font-hand text-base text-foreground bg-card py-0.5 border border-foreground/30 rotate-[3deg]">
+                  {STATE_CAPTIONS[state!.code]}
                 </div>
               </div>
             </div>
