@@ -254,18 +254,18 @@ function KpiSticker({
       }}
     >
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="font-display text-[11px] uppercase tracking-widest opacity-90">
+        <div className="min-w-0 flex-1">
+          <div className="font-display text-[11px] uppercase tracking-widest opacity-90 truncate">
             {label}
           </div>
-          <div className="mt-2 font-display text-5xl sm:text-6xl leading-none">
+          <div className="mt-2 font-display text-4xl sm:text-5xl leading-none truncate">
             {value}
           </div>
         </div>
         <div
-          className={`w-12 h-12 ${iconBg} border-2 border-current/30 grid place-items-center rotate-[-6deg] shrink-0`}
+          className={`w-10 h-10 sm:w-11 sm:h-11 ${iconBg} border-2 border-current/30 grid place-items-center rotate-[-6deg] shrink-0`}
         >
-          <Icon className="w-5 h-5" strokeWidth={2.5} />
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2.5} />
         </div>
       </div>
       <div className="mt-4 font-hand text-lg opacity-95">{caption}</div>
