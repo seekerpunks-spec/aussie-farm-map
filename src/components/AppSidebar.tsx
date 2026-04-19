@@ -145,26 +145,22 @@ export function AppSidebar() {
         ))}
       </nav>
 
-      {/* Footer: collapse + signout */}
-      <div className="border-t-2 border-foreground/15 p-2 space-y-1">
-        <button
-          onClick={() => setCollapsed((c) => !c)}
-          className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-secondary/60 border-2 border-transparent hover:border-foreground/20 transition-all ${
-            collapsed ? "justify-center" : ""
-          }`}
-          title={collapsed ? "Expand" : "Collapse"}
-        >
-          {collapsed ? (
-            <PanelLeftOpen className="w-5 h-5 text-primary-deep" strokeWidth={2} />
-          ) : (
-            <PanelLeftClose className="w-5 h-5 text-primary-deep" strokeWidth={2} />
-          )}
-          {!collapsed && (
-            <span className="font-display text-[13px] uppercase tracking-wider text-foreground">
-              Collapse
-            </span>
-          )}
-        </button>
+      {/* Floating collapse toggle — centered on right edge */}
+      <button
+        onClick={() => setCollapsed((c) => !c)}
+        title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        className="absolute top-1/2 -translate-y-1/2 -right-3.5 z-40 w-7 h-7 rounded-full bg-card border-2 border-foreground shadow-sticker grid place-items-center hover:bg-primary hover:text-primary-foreground hover:rotate-12 transition-all"
+      >
+        {collapsed ? (
+          <PanelLeftOpen className="w-3.5 h-3.5" strokeWidth={2.5} />
+        ) : (
+          <PanelLeftClose className="w-3.5 h-3.5" strokeWidth={2.5} />
+        )}
+      </button>
+
+      {/* Footer: signout */}
+      <div className="border-t-2 border-foreground/15 p-2">
         <button
           className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-destructive/10 border-2 border-transparent hover:border-destructive/40 transition-all ${
             collapsed ? "justify-center" : ""
