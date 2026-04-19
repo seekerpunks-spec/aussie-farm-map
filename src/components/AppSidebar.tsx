@@ -147,15 +147,16 @@ export function AppSidebar() {
 
       {/* Floating collapse toggle — centered on right edge */}
       <button
+        type="button"
         onClick={() => setCollapsed((c) => !c)}
         title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        className="absolute top-1/2 -translate-y-1/2 -right-3.5 z-40 w-7 h-7 rounded-full bg-card border-2 border-foreground shadow-sticker grid place-items-center hover:bg-primary hover:text-primary-foreground hover:rotate-12 transition-all"
+        className="absolute top-1/2 -translate-y-1/2 -right-4 z-50 w-8 h-8 rounded-full bg-card border-2 border-foreground shadow-sticker grid place-items-center hover:bg-primary hover:text-primary-foreground hover:rotate-12 transition-all cursor-pointer"
       >
         {collapsed ? (
-          <PanelLeftOpen className="w-3.5 h-3.5" strokeWidth={2.5} />
+          <PanelLeftOpen className="w-4 h-4 pointer-events-none" strokeWidth={2.5} />
         ) : (
-          <PanelLeftClose className="w-3.5 h-3.5" strokeWidth={2.5} />
+          <PanelLeftClose className="w-4 h-4 pointer-events-none" strokeWidth={2.5} />
         )}
       </button>
 
