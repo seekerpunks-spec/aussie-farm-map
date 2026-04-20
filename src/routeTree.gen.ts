@@ -16,6 +16,7 @@ import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppMinesRouteImport } from './routes/app.mines'
 import { Route as AppMinesIndexRouteImport } from './routes/app.mines.index'
 import { Route as AppMinesAtlasRouteImport } from './routes/app.mines.atlas'
+import { Route as AppMinesStateRouteImport } from './routes/app.mines.$state'
 
 const FarmsRoute = FarmsRouteImport.update({
   id: '/farms',
@@ -52,6 +53,11 @@ const AppMinesAtlasRoute = AppMinesAtlasRouteImport.update({
   path: '/atlas',
   getParentRoute: () => AppMinesRoute,
 } as any)
+const AppMinesStateRoute = AppMinesStateRouteImport.update({
+  id: '/$state',
+  path: '/$state',
+  getParentRoute: () => AppMinesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/farms': typeof FarmsRoute
   '/app/mines': typeof AppMinesRouteWithChildren
   '/app/': typeof AppIndexRoute
+  '/app/mines/$state': typeof AppMinesStateRoute
   '/app/mines/atlas': typeof AppMinesAtlasRoute
   '/app/mines/': typeof AppMinesIndexRoute
 }
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/farms': typeof FarmsRoute
   '/app': typeof AppIndexRoute
+  '/app/mines/$state': typeof AppMinesStateRoute
   '/app/mines/atlas': typeof AppMinesAtlasRoute
   '/app/mines': typeof AppMinesIndexRoute
 }
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/farms': typeof FarmsRoute
   '/app/mines': typeof AppMinesRouteWithChildren
   '/app/': typeof AppIndexRoute
+  '/app/mines/$state': typeof AppMinesStateRoute
   '/app/mines/atlas': typeof AppMinesAtlasRoute
   '/app/mines/': typeof AppMinesIndexRoute
 }
@@ -87,10 +96,17 @@ export interface FileRouteTypes {
     | '/farms'
     | '/app/mines'
     | '/app/'
+    | '/app/mines/$state'
     | '/app/mines/atlas'
     | '/app/mines/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/farms' | '/app' | '/app/mines/atlas' | '/app/mines'
+  to:
+    | '/'
+    | '/farms'
+    | '/app'
+    | '/app/mines/$state'
+    | '/app/mines/atlas'
+    | '/app/mines'
   id:
     | '__root__'
     | '/'
@@ -98,6 +114,7 @@ export interface FileRouteTypes {
     | '/farms'
     | '/app/mines'
     | '/app/'
+    | '/app/mines/$state'
     | '/app/mines/atlas'
     | '/app/mines/'
   fileRoutesById: FileRoutesById
@@ -159,15 +176,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppMinesAtlasRouteImport
       parentRoute: typeof AppMinesRoute
     }
+    '/app/mines/$state': {
+      id: '/app/mines/$state'
+      path: '/$state'
+      fullPath: '/app/mines/$state'
+      preLoaderRoute: typeof AppMinesStateRouteImport
+      parentRoute: typeof AppMinesRoute
+    }
   }
 }
 
 interface AppMinesRouteChildren {
+  AppMinesStateRoute: typeof AppMinesStateRoute
   AppMinesAtlasRoute: typeof AppMinesAtlasRoute
   AppMinesIndexRoute: typeof AppMinesIndexRoute
 }
 
 const AppMinesRouteChildren: AppMinesRouteChildren = {
+  AppMinesStateRoute: AppMinesStateRoute,
   AppMinesAtlasRoute: AppMinesAtlasRoute,
   AppMinesIndexRoute: AppMinesIndexRoute,
 }

@@ -5,6 +5,7 @@ import {
   Briefcase,
   Sparkles,
   Tractor,
+  Pickaxe,
   Calculator,
   FileEdit,
   History,
@@ -31,6 +32,7 @@ const SECTIONS: { label: string; items: NavItem[] }[] = [
       { to: "/app/jobs", label: "Jobs", icon: Briefcase },
       { to: "/app/matched", label: "Matched", icon: Sparkles },
       { to: "/app/farms", label: "Farms", icon: Tractor },
+      { to: "/app/mines", label: "Mines", icon: Pickaxe },
     ],
   },
   {
