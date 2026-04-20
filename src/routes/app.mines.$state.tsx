@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, Search, Star, Bed } from "lucide-react";
 import { useMemo, useState } from "react";
-import { generateMineSites, getMineState, ORES, type MineStateCode } from "@/lib/mines-data";
+import { generateMineSites, getMineState, ORES, type MineStateCode, type OreCode } from "@/lib/mines-data";
 
 export const Route = createFileRoute("/app/mines/$state")({
   loader: ({ params }) => {
@@ -50,7 +50,7 @@ function MineStateDetailPage() {
     );
   }, [sites, query]);
 
-  const primaryOre = ORES[state.primaryOre];
+  const primaryOre = ORES[state.primaryOre as OreCode];
 
   return (
     <main className="min-h-screen bg-gradient-hero">
