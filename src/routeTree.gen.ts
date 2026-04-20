@@ -13,6 +13,7 @@ import { Route as FarmsRouteImport } from './routes/farms'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppMinesRouteImport } from './routes/app.mines'
 
 const FarmsRoute = FarmsRouteImport.update({
   id: '/farms',
@@ -34,16 +35,23 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMinesRoute = AppMinesRouteImport.update({
+  id: '/mines',
+  path: '/mines',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/farms': typeof FarmsRoute
+  '/app/mines': typeof AppMinesRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/farms': typeof FarmsRoute
+  '/app/mines': typeof AppMinesRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
@@ -51,14 +59,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/farms': typeof FarmsRoute
+  '/app/mines': typeof AppMinesRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/farms' | '/app/'
+  fullPaths: '/' | '/app' | '/farms' | '/app/mines' | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/farms' | '/app'
-  id: '__root__' | '/' | '/app' | '/farms' | '/app/'
+  to: '/' | '/farms' | '/app/mines' | '/app'
+  id: '__root__' | '/' | '/app' | '/farms' | '/app/mines' | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,14 +106,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/mines': {
+      id: '/app/mines'
+      path: '/mines'
+      fullPath: '/app/mines'
+      preLoaderRoute: typeof AppMinesRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppMinesRoute: typeof AppMinesRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppMinesRoute: AppMinesRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
@@ -118,3 +136,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
