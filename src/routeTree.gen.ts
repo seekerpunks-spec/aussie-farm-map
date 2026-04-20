@@ -13,6 +13,10 @@ import { Route as FarmsRouteImport } from './routes/farms'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppMinesRouteImport } from './routes/app.mines'
+import { Route as AppMinesIndexRouteImport } from './routes/app.mines.index'
+import { Route as AppMinesAtlasRouteImport } from './routes/app.mines.atlas'
+import { Route as AppMinesStateRouteImport } from './routes/app.mines.$state'
 
 const FarmsRoute = FarmsRouteImport.update({
   id: '/farms',
@@ -34,31 +38,85 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppMinesRoute = AppMinesRouteImport.update({
+  id: '/mines',
+  path: '/mines',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMinesIndexRoute = AppMinesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppMinesRoute,
+} as any)
+const AppMinesAtlasRoute = AppMinesAtlasRouteImport.update({
+  id: '/atlas',
+  path: '/atlas',
+  getParentRoute: () => AppMinesRoute,
+} as any)
+const AppMinesStateRoute = AppMinesStateRouteImport.update({
+  id: '/$state',
+  path: '/$state',
+  getParentRoute: () => AppMinesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/farms': typeof FarmsRoute
+  '/app/mines': typeof AppMinesRouteWithChildren
   '/app/': typeof AppIndexRoute
+  '/app/mines/$state': typeof AppMinesStateRoute
+  '/app/mines/atlas': typeof AppMinesAtlasRoute
+  '/app/mines/': typeof AppMinesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/farms': typeof FarmsRoute
   '/app': typeof AppIndexRoute
+  '/app/mines/$state': typeof AppMinesStateRoute
+  '/app/mines/atlas': typeof AppMinesAtlasRoute
+  '/app/mines': typeof AppMinesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/farms': typeof FarmsRoute
+  '/app/mines': typeof AppMinesRouteWithChildren
   '/app/': typeof AppIndexRoute
+  '/app/mines/$state': typeof AppMinesStateRoute
+  '/app/mines/atlas': typeof AppMinesAtlasRoute
+  '/app/mines/': typeof AppMinesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/farms' | '/app/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/farms'
+    | '/app/mines'
+    | '/app/'
+    | '/app/mines/$state'
+    | '/app/mines/atlas'
+    | '/app/mines/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/farms' | '/app'
-  id: '__root__' | '/' | '/app' | '/farms' | '/app/'
+  to:
+    | '/'
+    | '/farms'
+    | '/app'
+    | '/app/mines/$state'
+    | '/app/mines/atlas'
+    | '/app/mines'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/farms'
+    | '/app/mines'
+    | '/app/'
+    | '/app/mines/$state'
+    | '/app/mines/atlas'
+    | '/app/mines/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -97,14 +155,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/mines': {
+      id: '/app/mines'
+      path: '/mines'
+      fullPath: '/app/mines'
+      preLoaderRoute: typeof AppMinesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mines/': {
+      id: '/app/mines/'
+      path: '/'
+      fullPath: '/app/mines/'
+      preLoaderRoute: typeof AppMinesIndexRouteImport
+      parentRoute: typeof AppMinesRoute
+    }
+    '/app/mines/atlas': {
+      id: '/app/mines/atlas'
+      path: '/atlas'
+      fullPath: '/app/mines/atlas'
+      preLoaderRoute: typeof AppMinesAtlasRouteImport
+      parentRoute: typeof AppMinesRoute
+    }
+    '/app/mines/$state': {
+      id: '/app/mines/$state'
+      path: '/$state'
+      fullPath: '/app/mines/$state'
+      preLoaderRoute: typeof AppMinesStateRouteImport
+      parentRoute: typeof AppMinesRoute
+    }
   }
 }
 
+interface AppMinesRouteChildren {
+  AppMinesStateRoute: typeof AppMinesStateRoute
+  AppMinesAtlasRoute: typeof AppMinesAtlasRoute
+  AppMinesIndexRoute: typeof AppMinesIndexRoute
+}
+
+const AppMinesRouteChildren: AppMinesRouteChildren = {
+  AppMinesStateRoute: AppMinesStateRoute,
+  AppMinesAtlasRoute: AppMinesAtlasRoute,
+  AppMinesIndexRoute: AppMinesIndexRoute,
+}
+
+const AppMinesRouteWithChildren = AppMinesRoute._addFileChildren(
+  AppMinesRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppMinesRoute: typeof AppMinesRouteWithChildren
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppMinesRoute: AppMinesRouteWithChildren,
   AppIndexRoute: AppIndexRoute,
 }
 
