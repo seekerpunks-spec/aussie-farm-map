@@ -5,7 +5,8 @@ import { generateMineSites, getMineState, ORES, type MineStateCode } from "@/lib
 
 export const Route = createFileRoute("/app/mines/$state")({
   loader: ({ params }) => {
-    const state = getMineState(params.state.toUpperCase() as MineStateCode);
+    const code = params.state.toUpperCase() as MineStateCode;
+    const state = getMineState(code);
     if (!state) throw notFound();
     return { state };
   },
