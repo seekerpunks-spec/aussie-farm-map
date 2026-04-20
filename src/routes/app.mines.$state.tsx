@@ -140,7 +140,7 @@ function MineStateDetailPage() {
         ) : (
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filtered.map((site, i) => {
-              const ore = ORES[site.ore];
+              const ore = ORES[site.ore as OreCode];
               const rot = i % 2 === 0 ? -0.6 : 0.6;
               return (
                 <article
