@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Search, Filter, Mail, ArrowRight, AlertTriangle, Pin } from "lucide-react";
+import { Search, Filter, Mail, ArrowRight, AlertTriangle } from "lucide-react";
+import poster from "@/assets/jobs-poster-70s.jpg";
 
 export const Route = createFileRoute("/app/jobs")({
   head: () => ({
