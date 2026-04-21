@@ -22,6 +22,7 @@ export const Route = createFileRoute("/app/jobs")({
   component: JobsPage,
 });
 
+// Live screen-print poster page
 function JobsPage() {
   return (
     <main className="px-6 sm:px-10 py-8 sm:py-10 max-w-[1400px] mx-auto">
